@@ -143,17 +143,17 @@ loadModule.build = function (config) {
         });
       }
     });
-
+    // 扩展backbone应有的属性（除了私有属性之外）
     wholeView.extend(_.omit(wholeViewConf, 'asocial'));
-
+    // 扩展backbone应有的属性（除了私有属性之外）
     wholeModel.extend(_.omit(wholeModelConf, 'asocial'));
 
     var wholemodel = new wholeModel(_.pick(wholeModelConf, 'asocial')['asocial']);
 
     var wholeview = new wholeView(_.pick(wholeViewConf, 'asocial')['asocial']);
-
+    // 调用wholeview初始化
     wholeview.trigger('whole:viewinit');
-
+    // 调用wholemodel初始化
     wholemodel.trigger('whole:modelinit', wholeview);
 
     // TODO: return result.
