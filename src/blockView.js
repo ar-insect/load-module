@@ -20,14 +20,4 @@
     }
   });
 
-  var Meal = Backbone.Model.extend({
-    defaults: {
-      "appetizer":  "caesar salad",
-      "entree":     "ravioli",
-      "dessert":    "cheesecake"
-    }
-  });
-
-  (new Meal).get('dessert')
-
   module.exports = BlockView;
