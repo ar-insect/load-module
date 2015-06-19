@@ -98,7 +98,7 @@ loadModule.build = function (config) {
           _.isPlainObject(param[0]) && _.extend(_self, param[0]);
           // 调用父类初始化
           loadModule.WholeView.prototype.initialize.apply(_self, param);
-            /*
+          /*
            if (_.isFunction(wholeViewConf.initialize)) {
            wholeViewConf.initialize.apply(_self, param);
            }*/
