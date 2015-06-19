@@ -92,6 +92,7 @@ loadModule.build = function (config) {
       initialize: function () {
         var _self = this;
         var param = arguments;
+        // 监听初始化，当在何时进行初始化只需要trigger('whole:viewinit')
         _self.on('whole:viewinit', function () {
           // 注意：这里model不需要显示地传入进来，因为在实例化blockview已经将model传进来并由backbone挂载在实例的model属性
           // 所以，这里直接在构造函数的参数里面去拿mode
