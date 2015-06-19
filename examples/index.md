@@ -10,10 +10,15 @@ var loadModule = require('load-module');
 loadModule.build({
     whole: {
       model: {
-        cid: 'wrap'
+        cid: 'wrap',
+        asocial: {
+          myTicket: 'eisieist'
+        }
       },
       view: {
-        
+        asocial: {
+          viewde: 'viewdefdd'
+        }
       }
     },
     block: {
@@ -25,25 +30,25 @@ loadModule.build({
             "entree":     "ravioli",
             "dessert":    "cheesecake"
           },
-          param: {},
-          url: '/data/formSearch/test.json'
+          asocial: {
+            param: {},
+            url: '/data/formSearch/test.json'
+          }
         },
         view: {
-          initialize: function() {
-          },
-          asocial: {
+          asocial:{
             template: 'hello <%= user %>!'
+            }
           }
-        }
       },
       city: {
         model: {
           cid: 'city'
         },
         view: {
-          asocial: {
-            template: 'hello <%= user %>!'
-          }
+            asocial: {
+              template: 'hello <%= user %>!'
+            }
         }
       }
     }

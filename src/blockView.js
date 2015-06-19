@@ -6,14 +6,14 @@
     events: {},
     className: 'sp-block',
     initialize: function () {
-        /*
+
       this.template = _.isString(this.template) ?
                     _.template(this.template) : this.template; // 初始化模板
-*/
-      //this.trigger('data:launch');
+
+      this.trigger('data:launch');
     },
     render: function () {
-      //this.template && alert( this.model.get('rows') );
+      this.template && alert( this.model.get('rows') );
     },
     getWidget: function(name) {
 
