@@ -40,7 +40,7 @@ loadModule.build = function (config) {
         // 监听初始化，当在何时进行初始化只需要trigger('block:viewinit')
         _self.on('block:viewinit', function () {
           // 注意：这里model不需要显示地传入进来，因为在实例化blockview已经将model传进来并由backbone挂载在实例的model属性
-          // 所以，这里直接在构造函数的参数里面去拿mode
+          // 所以，这里直接在构造函数的参数里面去拿model
           var model = param[0].model;
           // model监听view的launch事件，一旦触发则调用model.launch()
           model.listenTo(_self, 'data:launch', model.launch);
@@ -95,7 +95,7 @@ loadModule.build = function (config) {
         // 监听初始化，当在何时进行初始化只需要trigger('whole:viewinit')
         _self.on('whole:viewinit', function () {
           // 注意：这里model不需要显示地传入进来，因为在实例化blockview已经将model传进来并由backbone挂载在实例的model属性
-          // 所以，这里直接在构造函数的参数里面去拿mode
+          // 所以，这里直接在构造函数的参数里面去拿model
           var model = param[0].model;
           // 出于安全性view只会pick出backbone指定的属性，其它属性是没有机会被扩展到实例上去
           // 直接将自定义属性挂载到view的实例上去
