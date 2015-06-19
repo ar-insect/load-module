@@ -37,9 +37,12 @@ loadModule.build({
         },
         view: {
           asocial:{
+            init: function() {
+              //alert(0);
+            },
             template: 'hello <%= user %>!'
-            }
           }
+        }
       },
       city: {
         model: {

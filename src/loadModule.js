@@ -24,11 +24,6 @@ loadModule.build = function (config) {
           view.listenTo(_self, 'change', view.render);
           // 调用父类初始化
           loadModule.Block.prototype.initialize.apply(_self, param);
-          /*
-           if (_.isFunction(param[0]['initialize'])) {
-           param[0]['initialize'].apply(_self, param);
-           }
-           */
         });
       }
     });
@@ -51,11 +46,10 @@ loadModule.build = function (config) {
           _.isPlainObject(param[0]) && _.extend(_self, param[0]);
           // 调用父类初始化
           loadModule.BlockView.prototype.initialize.apply(_self, param);
-          /*
-           if (_.isFunction(param[0]['initialize'])) {
-           param[0]['initialize'].apply(_self, param);
-           }
-           */
+          // 自定义初始化函数
+          if (_.isFunction(param[0]['init'])) {
+            param[0]['init'].apply(_self, param);
+          }
         });
       }
     });
@@ -68,10 +62,10 @@ loadModule.build = function (config) {
       blockModelConf = blockConf[blockName]['model'];
       // 对blockModel配置属性
       // 这些属性都是backbone定义的属性，在new构造时候会合并
-      blockModel.extend(_.omit(blockModelConf, 'asocial'));
+      blockModel = blockModel.extend(_.omit(blockModelConf, 'asocial'));
       // 对blockView配置属性
       // 这些属性都是backbone定义的属性，在new构造时候会合并
-      blockView.extend(_.omit(blockViewConf, 'asocial'));
+      blockView = blockView.extend(_.omit(blockViewConf, 'asocial'));
 
       blockModels.push(
           // 这里只传私有属性，可以通过get来获取
@@ -104,7 +98,7 @@ loadModule.build = function (config) {
           _.isPlainObject(param[0]) && _.extend(_self, param[0]);
           // 调用父类初始化
           loadModule.WholeView.prototype.initialize.apply(_self, param);
-          /*
+            /*
            if (_.isFunction(wholeViewConf.initialize)) {
            wholeViewConf.initialize.apply(_self, param);
            }*/
@@ -131,11 +125,6 @@ loadModule.build = function (config) {
           view.listenTo(_self, 'change', view.render);
           // 调用父类初始化
           loadModule.Whole.prototype.initialize.apply(_self, param);
-          /*
-           if (_.isFunction(wholeModelConf.initialize)) {
-           wholeModelConf.initialize.apply(_self, param);
-           }
-           */
           for (var p in blockMap) {
             // 通知blockmodel初始化
             blockMap[p]['model'].trigger('block:modelinit', blockMap[p]['view']);
@@ -144,9 +133,9 @@ loadModule.build = function (config) {
       }
     });
     // 扩展backbone应有的属性（除了私有属性之外）
-    wholeView.extend(_.omit(wholeViewConf, 'asocial'));
+    wholeView = wholeView.extend(_.omit(wholeViewConf, 'asocial'));
     // 扩展backbone应有的属性（除了私有属性之外）
-    wholeModel.extend(_.omit(wholeModelConf, 'asocial'));
+    wholeModel = wholeModel.extend(_.omit(wholeModelConf, 'asocial'));
 
     var wholemodel = new wholeModel(_.pick(wholeModelConf, 'asocial')['asocial']);
 
