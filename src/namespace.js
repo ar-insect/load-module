@@ -1,16 +1,15 @@
+var loadModule = {};
 
-  var loadModule = {};
+loadModule.version = '1.0.0';
 
-  loadModule.version = '1.0.0';
+loadModule.Collection = require('./collection');
 
-  loadModule.Collection = require('./collection');
+loadModule.Whole = require('./whole');
 
-  loadModule.Whole = require('./whole');
+loadModule.WholeView = require('./wholeView');
 
-  loadModule.WholeView = require('./wholeView');
+loadModule.BlockView = require('./blockView');
 
-  loadModule.BlockView = require('./blockView');
+loadModule.Block = require('./block');
 
-  loadModule.Block = require('./block');
-
-  module.exports = loadModule;
+module.exports = loadModule;

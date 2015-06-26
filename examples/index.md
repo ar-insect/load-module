@@ -5,6 +5,7 @@
 ## Normal usage
 
 ````javascript
+
 var loadModule = require('load-module');
 
 loadModule.build({
@@ -12,12 +13,11 @@ loadModule.build({
       model: {
         cid: 'wrap',
         asocial: {
-          myTicket: 'eisieist'
         }
       },
       view: {
+        el: $('#J_wrap'),
         asocial: {
-          viewde: 'viewdefdd'
         }
       }
     },
@@ -25,33 +25,32 @@ loadModule.build({
       shopname: {
         model: {
           cid: 'shopname',
-          defaults: {
-            "appetizer":  "caesar salad",
-            "entree":     "ravioli",
-            "dessert":    "cheesecake"
-          },
           asocial: {
             param: {},
             url: '/data/formSearch/test.json'
           }
         },
         view: {
+          el: $('#J_shopname'),
+          //className: 'aaa', 自定义classname
           asocial:{
             init: function() {
-              //alert(0);
             },
-            template: 'hello <%= user %>!'
+            template: $('#tpl').html() // 自定义模板
           }
         }
       },
       city: {
         model: {
-          cid: 'city'
+          cid: 'city',
+          asocial: {
+            url: '/casus/load.html'
+          }
         },
         view: {
-            asocial: {
-              template: 'hello <%= user %>!'
-            }
+          el: $('#J_city'),
+          asocial: {
+          }
         }
       }
     }

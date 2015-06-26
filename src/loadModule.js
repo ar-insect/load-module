@@ -21,7 +21,7 @@ loadModule.build = function (config) {
         _self.on('block:modelinit', function (view) {
           // view监听model的change事件
           // model属性一旦发生变化则自动触发view.render
-          view.listenTo(_self, 'change', view.render);
+          view.listenTo(_self, 'change:data', view.render);
           // 调用父类初始化
           loadModule.Block.prototype.initialize.apply(_self, param);
         });
@@ -37,8 +37,8 @@ loadModule.build = function (config) {
           // 注意：这里model不需要显示地传入进来，因为在实例化blockview已经将model传进来并由backbone挂载在实例的model属性
           // 所以，这里直接在构造函数的参数里面去拿model
           var model = param[0].model;
-          // model监听view的launch事件，一旦触发则调用model.launch()
-          model.listenTo(_self, 'data:launch', model.launch);
+          // model监听view的start事件，一旦触发则调用model.start()
+          model.listenTo(_self, 'block:start', model.start);
           // 出于安全性view只会pick出backbone指定的属性，其它属性是没有机会被扩展到实例上去
           // 直接将自定义属性挂载到view的实例上去
           // 为了区分私有属性统一放在asocial对象里面
@@ -103,6 +103,7 @@ loadModule.build = function (config) {
            wholeViewConf.initialize.apply(_self, param);
            }*/
           for (var p in blockMap) {
+            _self.listenTo(blockMap[p]['view'], 'whole:render', _self.render);
             // 通过代理将view持有getWidget方法
             blockMap[p]['view']['getWidget'] = function (name) {
               return _self.getWidget(name);
@@ -126,6 +127,8 @@ loadModule.build = function (config) {
           // 调用父类初始化
           loadModule.Whole.prototype.initialize.apply(_self, param);
           for (var p in blockMap) {
+            // 监听每个blockview发来的事件，调用whole.setData设置数据从而触发whole.change事件
+            _self.listenTo(blockMap[p]['model'], 'whole:set', _self.setData);
             // 通知blockmodel初始化
             blockMap[p]['model'].trigger('block:modelinit', blockMap[p]['view']);
           }
@@ -139,7 +142,10 @@ loadModule.build = function (config) {
 
     var wholemodel = new wholeModel(_.pick(wholeModelConf, 'asocial')['asocial']);
 
-    var wholeview = new wholeView(_.pick(wholeViewConf, 'asocial')['asocial']);
+    var wholeview = new wholeView(
+        _.assign({model: wholemodel}, _.pick(wholeViewConf, 'asocial')['asocial'])
+    );
+
     // 调用wholeview初始化
     wholeview.trigger('whole:viewinit');
     // 调用wholemodel初始化
