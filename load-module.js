@@ -1,3 +1,3 @@
-var loadModule = require('./src/loadModule');
+var loadModule = require('./src/load-module');
 
 module.exports = loadModule;

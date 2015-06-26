@@ -6,9 +6,9 @@ loadModule.Collection = require('./collection');
 
 loadModule.Whole = require('./whole');
 
-loadModule.WholeView = require('./wholeView');
+loadModule.WholeView = require('./whole-view');
 
-loadModule.BlockView = require('./blockView');
+loadModule.BlockView = require('./block-view');
 
 loadModule.Block = require('./block');
 
