@@ -14,7 +14,7 @@ var BlockView = Backbone.View.extend({
     var html, node;
     var data = this.model.get('data');
     if (this.template) {
-      html = this.template && this.template(data);
+      html = this.template(data);
       node = $(this.el).empty().append(html);
     } else {
       node = data;
