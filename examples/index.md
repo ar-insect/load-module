@@ -31,8 +31,6 @@ loadModule.build({
           }
         },
         view: {
-          el: $('#J_shopname'),
-          //className: 'aaa', 自定义classname
           asocial:{
             init: function() {
             },
@@ -48,7 +46,6 @@ loadModule.build({
           }
         },
         view: {
-          el: $('#J_city'),
           asocial: {
           }
         }
